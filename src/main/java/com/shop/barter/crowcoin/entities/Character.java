@@ -13,6 +13,8 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idc;
 
+    private String characterName;
+
     private Long crowCoins;
 
     private Long silver;
@@ -73,4 +75,11 @@ public class Character {
     }
 
 
+    public String getCharacterName() {
+        return characterName;
+    }
+
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
+    }
 }
