@@ -1,8 +1,10 @@
 package com.shop.barter.crowcoin.controller;
 
 import com.shop.barter.crowcoin.entities.Account;
+import com.shop.barter.crowcoin.entities.Character;
 import com.shop.barter.crowcoin.repository.AccountInterface;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.shop.barter.crowcoin.repository.CharacterInterface;
+/*import org.springframework.beans.factory.annotation.Autowired;*/
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,10 +15,22 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class AccountController
     {
-    @Autowired
-    private AccountInterface accountInterface;
+    private final AccountInterface accountInterface;
 
-    @GetMapping("/getallacc")
+    private final CharacterInterface characterInterface;
+
+        public AccountController(AccountInterface accountInterface, CharacterInterface characterInterface) {
+            this.accountInterface = accountInterface;
+            this.characterInterface = characterInterface;
+        }
+
+
+        @GetMapping("/getallchars")
+        public List<Character> getAllCharacters(){
+            return new ArrayList<>(characterInterface.findAll());
+        }
+
+        @GetMapping("/getallacc")
     public List<Account> getAllAccounts()
     {
         return new ArrayList<>(accountInterface.findAll());
@@ -44,4 +58,8 @@ public class AccountController
 
         return null;
     }
+    
+
+
+
 }
